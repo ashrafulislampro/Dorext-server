@@ -23,9 +23,9 @@ const client = new MongoClient(uri, {
 async function server() {
   try {
     await client.connect();
-    const database = client.db("process.env.DB_NAME");
-    const tourCollection = database.collection("process.env.DB_CONNECT");
-    const orderCollection = database.collection("process.env.DB_CONNECT2");
+    const database = client.db(`${process.env.DB_NAME}`);
+    const tourCollection = database.collection(`${process.env.DB_CONNECT}`);
+    const orderCollection = database.collection(`${process.env.DB_CONNECT2}`);
 
     
     //REQUEST TO GET ALL TOURS
