@@ -12,23 +12,13 @@ app.use(express.json());
 app.use(cors());
 
 /* -------------------------- MONGO DB CLIENT SETUP ------------------------- */
-// const uri = `mongodb+srv://@cluster0.xwgkc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
-// const client = new MongoClient(uri, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
-
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.q0pfb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   serverApi: ServerApiVersion.v1,
 });
-// client.connect((err) => {
-//   const collection = client.db("test").collection("devices");
-//   // perform actions on the collection object
-//   client.close();
-// });
+
 
 async function server() {
   try {
@@ -37,6 +27,7 @@ async function server() {
     const tourCollection = database.collection("process.env.DB_CONNECT");
     const orderCollection = database.collection("process.env.DB_CONNECT2");
 
+    
     //REQUEST TO GET ALL TOURS
     app.get("/tours", async (req, res) => {
       const result = await tourCollection.find({}).toArray();
@@ -51,6 +42,7 @@ async function server() {
 
       res.send(result);
     });
+
 
     //REQUEST GET FROM HOME TOURS
     app.get("/home/tours", async (req, res) => {
